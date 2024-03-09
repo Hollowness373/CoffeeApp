@@ -1,0 +1,19 @@
+{
+
+    "lightTheme": 
+        {
+            "background": "#ECE0D1",
+            "title": "#38220F",
+            "white": "#FFFFFF",
+            "black": "#444444",
+            "buttons": "#967259"
+        },
+    "darkTheme": 
+        {
+            "background": "#1A1C29",
+            "title": "#FFFFFF",
+            "white": "#FFFFFF",
+            "black": "#DDDDDD",
+            "buttons": "#967259"
+        }
+}
