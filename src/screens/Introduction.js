@@ -1,14 +1,20 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity } from "react-native";
 import { useTheme, useThemeUpdate } from "../component/ThemeContext";
+import { useRoute, useNavigation } from "@react-navigation/native";
 
 const { height, width } = Dimensions.get("window")
 
 const Introduction = () => {
 
-
   const themes = useTheme();
-  const onChangeThemes = useThemeUpdate();
+  const navigation = useNavigation();
+  //const onChangeThemes = useThemeUpdate();
+
+
+  const onNextPage = () => {
+    navigation.navigate("Home");
+  }
 
   return(
     <View style={[styles.container, {backgroundColor: themes.background}]}>
@@ -19,7 +25,7 @@ const Introduction = () => {
             <Text style={[styles.txtTitle, {color: themes.title}]}>Stay Focused</Text>
             <Text style={[styles.txtDescription, {color: themes.black}]}>Get the cup filled of your choice to stay focused and awake. Diffrent type of coffee menu, hot lottee cappucino</Text>
             <View style={{height: "20%"}}></View>
-            <TouchableOpacity onPress={onChangeThemes} style={styles.nxtBtn}>
+            <TouchableOpacity onPress={onNextPage} style={styles.nxtBtn}>
               <Text style={styles.btnTxt}>Dive In</Text>
               <Image source={require("../../assets/icons/arrowForwardWIcon.png")} style={styles.arrowRight}/>
             </TouchableOpacity>
