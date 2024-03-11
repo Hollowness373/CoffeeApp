@@ -1,14 +1,16 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native"
+import Introduction from "./src/screens/Introduction";
+import { ThemeProvider } from "./src/component/ThemeContext";
 
 
 const App = () => {
 
 
   return(
-    <View style={styles.container}>
-        <Text>Coffee App !</Text>
-    </View>
+    <ThemeProvider>
+      <Introduction/>
+    </ThemeProvider>
   )
 }
 

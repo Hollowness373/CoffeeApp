@@ -1,43 +1,25 @@
-import React, {useState, useEffect} from "react";
-import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity } from "react-native"
-import colortheme from "../../assets/colortheme.json"
+import React from "react";
+import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity } from "react-native";
+import { useTheme, useThemeUpdate } from "../component/ThemeContext";
 
 const { height, width } = Dimensions.get("window")
 
 const Introduction = () => {
 
-  const [ theme, changeTheme ] = useState({});
-  const [ currentTheme, setCurrentTheme ] = useState(true)
 
-
-  const onChangeTheme = () => {
-    setCurrentTheme(!currentTheme);
-  }
-
-  useEffect(() => {
-
-    if (currentTheme === true) {
-      changeTheme(colortheme.lightTheme)
-    } else if (currentTheme === false) {
-      changeTheme(colortheme.darkTheme)
-    } else {
-      changeTheme(colortheme.lightTheme)
-    }
-    console.log(theme);
-
-  }, [currentTheme])
-
+  const themes = useTheme();
+  const onChangeThemes = useThemeUpdate();
 
   return(
-    <View style={[styles.container, {backgroundColor: theme.background}]}>
+    <View style={[styles.container, {backgroundColor: themes.background}]}>
         <View style={styles.imgContainer}>
           <Image source={require("../../assets/coffeeIntro.png")} style={styles.imgStyle}/>
         </View>
         <View style={styles.viewContainer}>
-            <Text style={[styles.txtTitle, {color: theme.title}]}>Stay Focused</Text>
-            <Text style={[styles.txtDescription, {color: theme.black}]}>Get the cup filled of your choice to stay focused and awake. Diffrent type of coffee menu, hot lottee cappucino</Text>
+            <Text style={[styles.txtTitle, {color: themes.title}]}>Stay Focused</Text>
+            <Text style={[styles.txtDescription, {color: themes.black}]}>Get the cup filled of your choice to stay focused and awake. Diffrent type of coffee menu, hot lottee cappucino</Text>
             <View style={{height: "20%"}}></View>
-            <TouchableOpacity onPress={onChangeTheme} style={styles.nxtBtn}>
+            <TouchableOpacity onPress={onChangeThemes} style={styles.nxtBtn}>
               <Text style={styles.btnTxt}>Dive In</Text>
               <Image source={require("../../assets/icons/arrowForwardWIcon.png")} style={styles.arrowRight}/>
             </TouchableOpacity>
