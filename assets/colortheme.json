@@ -1,19 +1,32 @@
+
 {
 
     "lightTheme": 
         {
-            "background": "#ECE0D1",
+            "introbackground": "#ECE0D1",
+            "background" : "#FFFFFF",
             "title": "#38220F",
             "white": "#FFFFFF",
             "black": "#444444",
-            "buttons": "#967259"
+            "tagline": "#444444",
+            "buttons": "#967259",
+            "searchIcon": true,
+            "searchBackground": "#FFFFFF",
+            "placeholderTextColor": "#444444",
+            "borderWidth": 1
         },
     "darkTheme": 
         {
-            "background": "#1A1C29",
+            "introbackground": "#1A1C29",
+            "background" : "#1A1C29",
             "title": "#FFFFFF",
             "white": "#FFFFFF",
             "black": "#DDDDDD",
-            "buttons": "#967259"
+            "tagline": "#FFFFFF",
+            "buttons": "#967259",
+            "searchIcon": false,
+            "searchBackground": "#2F3548",
+            "placeholderTextColor": "#FFFFFF",
+            "borderWidth": 0
         }
 }

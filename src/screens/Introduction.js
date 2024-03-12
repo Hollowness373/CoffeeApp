@@ -17,7 +17,7 @@ const Introduction = () => {
   }
 
   return(
-    <View style={[styles.container, {backgroundColor: themes.background}]}>
+    <View style={[styles.container, {backgroundColor: themes.introbackground}]}>
         <View style={styles.imgContainer}>
           <Image source={require("../../assets/coffeeIntro.png")} style={styles.imgStyle}/>
         </View>
