@@ -5,13 +5,14 @@
         {
             "introbackground": "#ECE0D1",
             "background" : "#FFFFFF",
+            "listBackground" : "#FAFAFA",
             "title": "#38220F",
             "white": "#FFFFFF",
             "black": "#444444",
             "tagline": "#444444",
             "buttons": "#967259",
             "searchIcon": true,
-            "searchBackground": "#FFFFFF",
+            "componentBackground": "#FFFFFF",
             "placeholderTextColor": "#444444",
             "borderWidth": 1
         },
@@ -19,13 +20,14 @@
         {
             "introbackground": "#1A1C29",
             "background" : "#1A1C29",
+            "listBackground" : "#1A1C29",
             "title": "#FFFFFF",
             "white": "#FFFFFF",
             "black": "#DDDDDD",
             "tagline": "#FFFFFF",
             "buttons": "#967259",
             "searchIcon": false,
-            "searchBackground": "#2F3548",
+            "componentBackground": "#2F3548",
             "placeholderTextColor": "#FFFFFF",
             "borderWidth": 0
         }

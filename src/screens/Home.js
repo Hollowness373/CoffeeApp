@@ -2,7 +2,9 @@ import React, {useState} from "react";
 import { View, Text, StyleSheet, Dimensions, Image, TouchableOpacity, FlatList } from "react-native"
 import { useTheme, useThemeUpdate } from "../component/ThemeContext";
 import { useRoute, useNavigation } from "@react-navigation/native";
+import coffeeData from "../../assets/coffeeitems.json";
 import CustomInput from "../component/CustomInput";
+import ItemComponent from "../component/ItemComponent";
 
 const { height, width } = Dimensions.get("window");
 const headNavHeight = height / 14;
@@ -32,7 +34,7 @@ const Home = () => {
             source={themes.searchIcon? require("../../assets/icons/searchIconLight.png"):require("../../assets/icons/searchIconDark.png")} 
             placeholder={"Find your coffee..."} 
             onChangeText={queryCoffee}
-            searchBackground={themes.searchBackground}
+            searchBackground={themes.componentBackground}
             placeholderTextColor={themes.placeholderTextColor}
             borderWidth={themes.borderWidth}
           />
@@ -47,6 +49,23 @@ const Home = () => {
           <Text style={[styles.cGenre, {color: themes.title}]}>Cappuccino</Text>
           <Text style={[styles.cGenre, {color: themes.title}]}>Cafetière</Text>
         </View>
+        <FlatList
+          key={numColumns}
+          data={coffeeData}
+          numColumns={numColumns}
+          style={{backgroundColor: themes.listBackground, flexGrow: 0}}
+          columnWrapperStyle={{justifyContent: "space-between"}}
+          renderItem={(item) => 
+            <ItemComponent 
+              imgURL={item.item.image}
+              itemName={item.item.itemname}
+              itemColor={themes.tagline}
+              addons={item.item.addons}
+              addonsColor={themes.black}
+              price={item.item.price}
+              componentBackground={themes.componentBackground}
+            />}
+        />
       </View>
     </View>
   )
