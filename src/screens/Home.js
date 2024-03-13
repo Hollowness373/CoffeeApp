@@ -66,6 +66,12 @@ const Home = () => {
               componentBackground={themes.componentBackground}
             />}
         />
+        <View style={{flex: 1, marginTop: 20}}>
+          <Text style={[styles.tagline, {color: themes.tagline}]}>Special for you</Text>
+          <View style={[styles.forYou, {backgroundColor: "#967259"}]}>
+
+          </View>
+        </View>
       </View>
     </View>
   )
@@ -133,6 +139,13 @@ const styles = StyleSheet.create({
   cGenre: {
     fontSize: 18,
     fontWeight: "bold"
+  },
+  forYou: {
+    height: height / 3, 
+    width: "100%", 
+    marginTop: 20, 
+    borderRadius: 30, 
+    padding: 10
   }
 });
 
