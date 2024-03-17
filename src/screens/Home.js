@@ -35,7 +35,7 @@ const Home = () => {
         <Text style={[styles.tagline, {color: themes.tagline}]}>Coffee to your taste</Text>
         <View style={styles.searchBarContainer}>
           <CustomInput
-            source={themes.searchIcon? require("../../assets/icons/searchIconLight.png"):require("../../assets/icons/searchIconDark.png")} 
+            source={themes.iconColor? require("../../assets/icons/searchIconLight.png"):require("../../assets/icons/searchIconDark.png")} 
             placeholder={"Find your coffee..."} 
             onChangeText={queryCoffee}
             searchBackground={themes.componentBackground}
@@ -68,6 +68,7 @@ const Home = () => {
               addonsColor={themes.black}
               price={item.item.price}
               componentBackground={themes.componentBackground}
+              itemData={item.item}
             />}
         />
         <View style={{flex: 1, marginTop: 20}}>

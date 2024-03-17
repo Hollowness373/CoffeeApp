@@ -4,13 +4,15 @@
         "addons": "with Oat Milk",
         "price": "4.20",
         "rating": "4.5",
-        "image": "https://aeropress.com/cdn/shop/articles/Espresso-cup-with-coffee-beans_600x.jpg?v=1681501296"
+        "image": "https://aeropress.com/cdn/shop/articles/Espresso-cup-with-coffee-beans_600x.jpg?v=1681501296",
+        "itemImage" : "https://www.shutterstock.com/image-photo/cup-hot-cappuccino-coffee-on-600nw-2027907107.jpg"
     },
     {
         "itemname": "Espresso",
         "addons": "with Milk",
         "price": "4.20",
         "rating": "4.7",
-        "image": "https://cdn.shopify.com/s/files/1/0416/7863/5167/files/stencil.default_1ab2b5cd-6c32-41b8-852d-2f3103dbf1d5_1024x1024.jpg?v=1647881209"
+        "image": "https://cdn.shopify.com/s/files/1/0416/7863/5167/files/stencil.default_1ab2b5cd-6c32-41b8-852d-2f3103dbf1d5_1024x1024.jpg?v=1647881209",
+        "itemImage" : "https://img.freepik.com/premium-photo/hot-coffee-capuccino-cup-with-latte-art-wood-table-cafe_778722-18.jpg"
     }
 ]

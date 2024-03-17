@@ -1,15 +1,21 @@
 import React, {useState} from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions, Image } from "react-native";
-
+import { useNavigation } from "@react-navigation/native";
 
 const { height, width } = Dimensions.get("window");
 const containerHeight = height / 3.8;
 
-const ItemComponent = ({ imgURL, itemName, addons, price, componentBackground, itemColor, addonsColor}) => {
+const ItemComponent = ({ imgURL, itemName, addons, price, componentBackground, 
+    itemColor, addonsColor, itemData}) => {
+    
+    const navigation = useNavigation();
 
+    const onItemClick = () => {
+        navigation.navigate("Item", {itemData})
+    }
 
     return(
-        <View style={[styles.container, {backgroundColor: componentBackground}]}>
+        <TouchableOpacity onPress={onItemClick} style={[styles.container, {backgroundColor: componentBackground}]}>
             <View style={styles.imageContainer}>
                 <Image 
                     source={{uri : imgURL}}
@@ -29,7 +35,7 @@ const ItemComponent = ({ imgURL, itemName, addons, price, componentBackground, i
             </TouchableOpacity>
             
             
-        </View>
+        </TouchableOpacity>
     )
 }
 

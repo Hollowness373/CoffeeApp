@@ -11,7 +11,7 @@
             "black": "#444444",
             "tagline": "#444444",
             "buttons": "#967259",
-            "searchIcon": true,
+            "iconColor": true,
             "componentBackground": "#FFFFFF",
             "placeholderTextColor": "#444444",
             "borderWidth": 1
@@ -26,7 +26,7 @@
             "black": "#DDDDDD",
             "tagline": "#FFFFFF",
             "buttons": "#967259",
-            "searchIcon": false,
+            "iconColor": false,
             "componentBackground": "#2F3548",
             "placeholderTextColor": "#FFFFFF",
             "borderWidth": 0
