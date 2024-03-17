@@ -1,5 +1,6 @@
 import React, {useState} from "react";
-import { View, Text, StyleSheet, Dimensions, Image, TouchableOpacity, FlatList } from "react-native"
+import { View, Text, StyleSheet, Dimensions, Image, TouchableOpacity, FlatList } from "react-native";
+import { ScrollView } from 'react-native-virtualized-view';
 import { useTheme, useThemeUpdate } from "../component/ThemeContext";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import coffeeData from "../../assets/coffeeitems.json";
@@ -9,6 +10,7 @@ import ItemComponent from "../component/ItemComponent";
 const { height, width } = Dimensions.get("window");
 const headNavHeight = height / 14;
 const numColumns = 2;
+const forYouContainerHeight = height / 4.5;
 
 const Home = () => {
 
@@ -20,6 +22,8 @@ const Home = () => {
 
   return(
     <View style={[styles.container, { backgroundColor: themes.background}]}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+      
       <View style={styles.headNav}>
           <TouchableOpacity onPress={onChangeThemes}>
             <Image source={require("../../assets/icons/categoryIcon.png")} style={styles.categorySize}/>
@@ -68,11 +72,17 @@ const Home = () => {
         />
         <View style={{flex: 1, marginTop: 20}}>
           <Text style={[styles.tagline, {color: themes.tagline}]}>Special for you</Text>
-          <View style={[styles.forYou, {backgroundColor: "#967259"}]}>
-
-          </View>
+          <TouchableOpacity style={[styles.forYou, {backgroundColor: "#967259"}]}>
+            <Image source={require("../../assets/icons/recommendedCoffee.png")} style={{height: 130, width: 130, borderRadius: 30}}/>
+            <View style={styles.txtContainerStyle}>
+              <Text style={styles.txtStyle}>Specially mixed and brewed which you must try!</Text>
+              <Text style={[styles.txtStyle, {marginTop: 20}]}>$11.00</Text>
+            </View>
+          </TouchableOpacity>
         </View>
       </View>
+
+      </ScrollView>
     </View>
   )
 }
@@ -81,7 +91,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    padding: 20
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingTop: 20,
   },
   headNav: {
     height: headNavHeight,
@@ -141,11 +153,29 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   },
   forYou: {
-    height: height / 3, 
+    height: 145,
     width: "100%", 
     marginTop: 20, 
-    borderRadius: 30, 
-    padding: 10
+    borderRadius: 30,
+    paddingTop: 5,
+    paddingBottom: 5,
+    paddingLeft: 15,
+    paddingRight: 15,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between"
+  },
+  txtContainerStyle: { 
+    flex: 1, 
+    height: "100%", 
+    width:"50%", 
+    paddingLeft: 30, 
+    paddingTop: 10
+  },
+  txtStyle: {
+    fontSize: 18, 
+    fontWeight: "bold", 
+    color: "#FFF"
   }
 });
 

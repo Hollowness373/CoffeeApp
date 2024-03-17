@@ -13,7 +13,7 @@ const Introduction = () => {
 
 
   const onNextPage = () => {
-    navigation.navigate("Home");
+    navigation.navigate("TabScreens");
   }
 
   return(
