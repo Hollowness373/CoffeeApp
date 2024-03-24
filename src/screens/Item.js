@@ -21,7 +21,9 @@ const Item = () => {
 
   return(
     <View style={[styles.container, {backgroundColor: themes.background}]}>
-      <ScrollView style={{flex: 1, width: "100%"}} showsVerticalScrollIndicator={false}>
+      <ScrollView 
+        style={{flex: 1, width: "100%"}} 
+        showsVerticalScrollIndicator={false}>
         <TransparentView 
           itemImage={itemData.itemImage}
           itemName={itemData.itemname}
@@ -31,7 +33,7 @@ const Item = () => {
         <ItemInfo itemDescription={itemData.itemDescription} />
       </ScrollView>
       <View style={[styles.footer, {backgroundColor: themes.background}]}>
-        <View style={styles.subContainer}>
+          <View style={styles.subContainer}>
             <View style={styles.priceContainer}>
               <Text style={{fontSize: 18, color: themes.tagline}}>Price</Text>
               <View style={styles.pValue}>
@@ -42,7 +44,7 @@ const Item = () => {
             <TouchableOpacity style={styles.buyBtn}>
               <Text style={{fontSize: 20, color: "#FFF"}}>Buy Now</Text>
             </TouchableOpacity>
-        </View>
+          </View>
       </View>
     </View>
   )

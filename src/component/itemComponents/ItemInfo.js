@@ -14,33 +14,11 @@ const ItemInfo = ({itemDescription}) => {
   const [ lineNum,  setLineNum ] = useState(2);
   const [ showTxt, setShowTxt ] = useState("Read More");
 
-  /*
-  const [ isPressed, setPressed ] = useState(false);
-  const [ chocBtn, setChocBtn] = useState("#FFFFFF");
-  const [ txtColor, setTxtColor ] = useState("black");
-
-  useEffect(() => {
-    if (isPressed == false) {
-        setChocBtn("#FFFFFF");
-        setTxtColor("black")
-    } else if (isPressed == true) {
-        setChocBtn("#967259");
-        setTxtColor("white")
-    }
-    
-  }, [isPressed])
-
-  const typeOfChocolatePressed = () => {
-      setPressed(!isPressed)
-  }
-  */
-
-
-  const chocTypes = [
-    { value: 'White Chocolate' },
-    { value: 'Milk Chocolate' },
-    { value: 'Dark Chocolate' },
-  ]
+  const [data , setData ] = useState([
+    { value: 'White Chocolate', focused: false },
+    { value: 'Milk Chocolate', focused: false },
+    { value: 'Dark Chocolate', focused: false },
+  ])
 
   const onShowTxt = () => {
     if (lineNum === 2) {
@@ -54,10 +32,30 @@ const ItemInfo = ({itemDescription}) => {
     }
   };
 
+  const typeOfChocolatesPressed = ({key}) => {
+    const newData = [...data]
+    if (key == 0) {
+      newData[0].focused = true;
+      newData[1].focused = false;
+      newData[2].focused = false;
+    } else if (key == 1) {
+      newData[0].focused = false;
+      newData[1].focused = true;
+      newData[2].focused = false;
+    } else if (key == 2) {
+      newData[0].focused = false;
+      newData[1].focused = false;
+      newData[2].focused = true;
+    } else {
+
+    }
+    setData(newData);
+  }
+
   const ChocolateTypes = () => {
     return <View style={{flexDirection: "row", justifyContent: "space-evenly"}}>
-      {chocTypes.map((item, key) =>
-        <ChocolateButtons item={item}/>
+      {data.map((item, key) =>
+        <ChocolateButtons focused={item.focused} typeOfChocolatesPressed={() => typeOfChocolatesPressed({key})} item={item} key={key}/>
       )}
     </View>
     

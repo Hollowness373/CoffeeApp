@@ -1,30 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
-const ChocolateButtons = ({item}) => {
-
-    const [ isPressed, setPressed ] = useState(false);
-    const [ chocBtn, setChocBtn] = useState("#FFFFFF");
-    const [ txtColor, setTxtColor ] = useState("black")
-
-    useEffect(() => {
-        if (isPressed == false) {
-            setChocBtn("#FFFFFF");
-            setTxtColor("black")
-        } else if (isPressed == true) {
-            setChocBtn("#967259");
-            setTxtColor("white")
-        }
-        
-    }, [isPressed])
-
-    const typeOfChocolatePressed = () => {
-        setPressed(!isPressed)
-    }
+const ChocolateButtons = ({item, typeOfChocolatesPressed, focused}) => {
 
   return (
-    <TouchableOpacity onPress={typeOfChocolatePressed} style={[styles.chocTypeContainer, {backgroundColor: chocBtn}]}>
-            <Text style={{color: txtColor}}>{item.value}</Text>
+    <TouchableOpacity onPress={typeOfChocolatesPressed} style={[styles.chocTypeContainer, {backgroundColor: focused? "#967259" : "#FFFFFF" }]}>
+            <Text style={{color: focused? "#FFFFFF" : "black"}}>{item.value}</Text>
     </TouchableOpacity>
   )
 }
