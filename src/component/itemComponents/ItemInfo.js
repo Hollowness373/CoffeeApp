@@ -1,13 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { useTheme } from "../ThemeContext";
 import ChocolateButtons from '../radioButtons/ChocolateButtons';
-
-const descriptionTxt = "Lorem ipsum dolor sit amet. Vel placeat omnis aut quibusdam similique et ipsam tenetur id enim ipsam qui error sunt quo nostrum dolorem nam rerum repudiandae";
-
+import SizeButtons from '../radioButtons/SizeButtons';
 
 
-const ItemInfo = ({itemDescription}) => {
+const ItemInfo = ({itemDescription, decrement, increment, quantity }) => {
 
 
   const themes = useTheme();
@@ -18,7 +16,13 @@ const ItemInfo = ({itemDescription}) => {
     { value: 'White Chocolate', focused: false },
     { value: 'Milk Chocolate', focused: false },
     { value: 'Dark Chocolate', focused: false },
-  ])
+  ]);
+
+  const [size , setSize ] = useState([
+    { value: 'S', focused: false },
+    { value: 'M', focused: false },
+    { value: 'L', focused: false },
+  ]);
 
   const onShowTxt = () => {
     if (lineNum === 2) {
@@ -34,31 +38,42 @@ const ItemInfo = ({itemDescription}) => {
 
   const typeOfChocolatesPressed = ({key}) => {
     const newData = [...data]
-    if (key == 0) {
-      newData[0].focused = true;
-      newData[1].focused = false;
-      newData[2].focused = false;
-    } else if (key == 1) {
-      newData[0].focused = false;
-      newData[1].focused = true;
-      newData[2].focused = false;
-    } else if (key == 2) {
-      newData[0].focused = false;
-      newData[1].focused = false;
-      newData[2].focused = true;
-    } else {
-
+    for (let  i = 0; i < 3; i++){
+      if ( i === key) {
+        newData[i].focused = true
+      } else {
+        newData[i].focused = false
+      }
     }
     setData(newData);
   }
 
+  const onCoffeeSize = ({key}) => {
+    const newCoffeeSize = [...size]
+    for (let  i = 0; i < 3; i++){
+      if ( i === key) {
+        newCoffeeSize[i].focused = true
+      } else {
+        newCoffeeSize[i].focused = false
+      }
+    }
+    setSize(newCoffeeSize);
+  }
+
   const ChocolateTypes = () => {
-    return <View style={{flexDirection: "row", justifyContent: "space-evenly"}}>
+    return <View style={styles.chocContainer}>
       {data.map((item, key) =>
         <ChocolateButtons focused={item.focused} typeOfChocolatesPressed={() => typeOfChocolatesPressed({key})} item={item} key={key}/>
       )}
     </View>
-    
+  }
+
+  const CoffeeSize = () => {
+    return <View style={styles.sizeContainer}>
+      {size.map((item, key) => 
+        <SizeButtons focused={item.focused} onCoffeeSize={() => onCoffeeSize({key})} item={item} key={key} />
+      )}
+    </View>
   }
 
   return (
@@ -66,8 +81,29 @@ const ItemInfo = ({itemDescription}) => {
           <Text style={[styles.desciption, {color: themes.tagline}]}>Description</Text>
           <Text numberOfLines={lineNum} style={[styles.descripTXT,{color: themes.tagline}]}>{itemDescription}</Text>
           <Text onPress={onShowTxt} style={[styles.txtReadM,{color: themes.tagline}]}>...{showTxt}</Text>
-          <Text style={[styles.desciption, {color: themes.tagline, marginTop: 20}]}>Choice of Chocolate</Text>
+          <Text style={[styles.desciption, {color: themes.tagline, marginTop: 10}]}>Choice of Chocolate</Text>
           <ChocolateTypes/>
+          <View style={styles.containSizeQuantity}>
+            <View style={{width: "50%"}}>
+              <Text style={[styles.desciption, {color: themes.tagline}]}>Size</Text>
+              <CoffeeSize />
+            </View>
+            <View style={{width: "50%"}}>
+              <Text style={[styles.desciption, {color: themes.tagline, alignSelf: "center"}]}>Quantity</Text>
+              <View style={styles.containIncrementDecrement}>
+                <TouchableOpacity onPress={decrement}>
+                  <Image source={require("../../../assets/icons/minusIcon.png")} style={{height: 40, width: 40}} />
+                </TouchableOpacity>
+                <View style={styles.quantityValueContainer}>
+                  <Text style={{fontSize: 18, fontWeight: "bold", color: themes.tagline}}>{quantity}</Text>
+                </View>
+                <TouchableOpacity onPress={increment}>
+                  <Image source={require("../../../assets/icons/plusIcon.png")} style={{height: 40, width: 40}} />
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+
     </View>
   )
 }
@@ -78,29 +114,49 @@ const styles = StyleSheet.create({
         flex: 1,
         width: "100%",
         padding: 10,
-        //backgroundColor: "red"
     },
     desciption: {
         fontSize: 20,
         fontWeight: "bold"
     },
     descripTXT: {
-      marginTop: 20,
+      marginTop: 10,
       lineHeight: 25,
     },
     txtReadM: {
       fontWeight: "bold",
       lineHeight: 25
     },
-    // Chocolate Type Component
-    chocTypeContainer: {
-      height: 40, 
-      width: "32%", 
-      borderRadius: 25,
-      justifyContent: "center",
-      alignItems: "center",
-      borderColor: "#967259",
-      borderWidth: 1
+    // Chocolate Type Container
+    chocContainer: {
+      flexDirection: "row", 
+      justifyContent: "space-evenly", 
+      marginTop: 20
+    },
+    // Coffee Size Container
+    sizeContainer: {
+      flexDirection: "row", 
+      width: "100%", 
+      justifyContent: "space-evenly", 
+      marginTop: 10
+    },
+    containSizeQuantity: { 
+      flexDirection: "row",
+      width: "100%", 
+      marginVertical: 20
+    },
+    containIncrementDecrement: {
+      flex: 1, 
+      flexDirection: "row", 
+      width: "100%", 
+      marginTop: 10, 
+      justifyContent: "flex-end"
+    },
+    quantityValueContainer: {
+      height: "100%", 
+      width: "40%", 
+      justifyContent: "center", 
+      alignItems: "center"
     }
 });
 

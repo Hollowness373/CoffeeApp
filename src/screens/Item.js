@@ -1,8 +1,7 @@
-import React from "react";
-import { View, Text, StyleSheet, Dimensions, Image, TouchableOpacity, ScrollView} from "react-native"
+import React, {useState, useEffect} from "react";
+import { View, Text, StyleSheet, Dimensions, TouchableOpacity, ScrollView} from "react-native"
 import { useTheme } from "../component/ThemeContext";
 import { useRoute, useNavigation } from "@react-navigation/native";
-//import { ScrollView } from 'react-native-virtualized-view';
 import TransparentView from "../component/TransparentView";
 import ItemInfo from "../component/itemComponents/ItemInfo";
 
@@ -10,14 +9,31 @@ const { height, width } = Dimensions.get("window");
 
 const Item = () => {
 
+  const price = 4.20;
   const themes = useTheme();
   const route = useRoute();
+  const [ quantity, setQuantity ] = useState(1);
+  const [ totalPrice, setTotalPrice ] = useState(price);
   const navigation = useNavigation();
-  const { itemData } = route.params
+  const { itemData } = route.params;
 
-  const click = () => {
-    console.log(itemData);
+  const decrementBtn = () => {
+    if (quantity <= 1) {
+      return
+    }
+    setQuantity(quantity - 1)
   }
+
+  const incrementBtn = () => {
+    setQuantity(quantity + 1)
+  }
+  
+  useEffect(() => {
+    const value = price * quantity;   // multiplier
+    const newValue = value.toFixed(2);  // fixing price value to tenth decimal point.
+    setTotalPrice(newValue)
+  }, [quantity])
+  
 
   return(
     <View style={[styles.container, {backgroundColor: themes.background}]}>
@@ -30,7 +46,12 @@ const Item = () => {
           addons={itemData.addons}
           rating={itemData.rating}
         />
-        <ItemInfo itemDescription={itemData.itemDescription} />
+        <ItemInfo 
+          itemDescription={itemData.itemDescription} 
+          quantity={quantity} 
+          decrement={() => decrementBtn()}
+          increment={() => incrementBtn()}
+        />
       </ScrollView>
       <View style={[styles.footer, {backgroundColor: themes.background}]}>
           <View style={styles.subContainer}>
@@ -38,7 +59,7 @@ const Item = () => {
               <Text style={{fontSize: 18, color: themes.tagline}}>Price</Text>
               <View style={styles.pValue}>
                 <Text  style={[styles.priceTxt,{ color: "#967259"}]}>$ </Text>
-                <Text style={[styles.priceTxt, { color: themes.tagline}]}>4.20</Text>
+                <Text style={[styles.priceTxt, { color: themes.tagline}]}>{totalPrice}</Text>
               </View>
             </View>
             <TouchableOpacity style={styles.buyBtn}>
