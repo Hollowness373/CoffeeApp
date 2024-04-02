@@ -5,25 +5,13 @@ import ChocolateButtons from '../radioButtons/ChocolateButtons';
 import SizeButtons from '../radioButtons/SizeButtons';
 
 
-const ItemInfo = ({itemDescription, decrement, increment, quantity }) => {
+const ItemInfo = ({itemDescription, decrement, increment, quantity, typeOfChocolatesPressed, onCoffeeSize, data, size }) => {
 
 
   const themes = useTheme();
   const [ lineNum,  setLineNum ] = useState(2);
   const [ showTxt, setShowTxt ] = useState("Read More");
-
-  const [data , setData ] = useState([
-    { value: 'White Chocolate', focused: false },
-    { value: 'Milk Chocolate', focused: false },
-    { value: 'Dark Chocolate', focused: false },
-  ]);
-
-  const [size , setSize ] = useState([
-    { value: 'S', focused: false },
-    { value: 'M', focused: false },
-    { value: 'L', focused: false },
-  ]);
-
+ 
   const onShowTxt = () => {
     if (lineNum === 2) {
       setLineNum(0);
@@ -35,30 +23,6 @@ const ItemInfo = ({itemDescription, decrement, increment, quantity }) => {
 
     }
   };
-
-  const typeOfChocolatesPressed = ({key}) => {
-    const newData = [...data]
-    for (let  i = 0; i < 3; i++){
-      if ( i === key) {
-        newData[i].focused = true
-      } else {
-        newData[i].focused = false
-      }
-    }
-    setData(newData);
-  }
-
-  const onCoffeeSize = ({key}) => {
-    const newCoffeeSize = [...size]
-    for (let  i = 0; i < 3; i++){
-      if ( i === key) {
-        newCoffeeSize[i].focused = true
-      } else {
-        newCoffeeSize[i].focused = false
-      }
-    }
-    setSize(newCoffeeSize);
-  }
 
   const ChocolateTypes = () => {
     return <View style={styles.chocContainer}>

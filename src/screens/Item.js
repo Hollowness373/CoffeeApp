@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from "react";
-import { View, Text, StyleSheet, Dimensions, TouchableOpacity, ScrollView} from "react-native"
+import { View, Text, StyleSheet, Dimensions, TouchableOpacity, ScrollView, Alert} from "react-native"
 import { useTheme } from "../component/ThemeContext";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import TransparentView from "../component/TransparentView";
 import ItemInfo from "../component/itemComponents/ItemInfo";
+import { addToCart } from "../component/AsyncStorageUtils";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const { height, width } = Dimensions.get("window");
 
@@ -17,6 +19,18 @@ const Item = () => {
   const navigation = useNavigation();
   const { itemData } = route.params;
 
+  const [data , setData ] = useState([
+    { value: 'White Chocolate', focused: false },
+    { value: 'Milk Chocolate', focused: false },
+    { value: 'Dark Chocolate', focused: false },
+  ]);
+
+  const [size , setSize ] = useState([
+    { value: 'S', focused: false },
+    { value: 'M', focused: false },
+    { value: 'L', focused: false },
+  ]);
+
   const decrementBtn = () => {
     if (quantity <= 1) {
       return
@@ -26,6 +40,64 @@ const Item = () => {
 
   const incrementBtn = () => {
     setQuantity(quantity + 1)
+  }
+  function generateRandomString(length) {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return result;
+  }
+
+  const onCart = async() => {
+    let chocolate = data.find((info) => info.focused === true);
+    let coffeeSize = size.find((i) => i.focused === true);
+    const items = [{
+      "total": totalPrice, 
+      "quantity": quantity, 
+      "chocolate": chocolate.value, 
+      "size": coffeeSize.value,
+      "name": itemData.name,
+      "image": itemData.image
+    }]
+    const cartID = generateRandomString(5)
+    //const finalData = {[cartID] : items}
+    if (chocolate && coffeeSize) {
+      try{
+        addToCart(items)
+        navigation.navigate("Home")
+      } catch (e) {
+        console.log(e)
+      }
+      
+    } else {1
+      Alert.alert("Missing Fields Required!");
+    }
+  }
+
+  const typeOfChocolatesPressed = ({key}) => {
+    const newData = [...data]
+    for (let  i = 0; i < 3; i++){
+      if ( i === key) {
+        newData[i].focused = true
+      } else {
+        newData[i].focused = false
+      }
+    }
+    setData(newData);
+  }
+
+  const onCoffeeSize = ({key}) => {
+    const newCoffeeSize = [...size]
+    for (let  i = 0; i < 3; i++){
+      if ( i === key) {
+        newCoffeeSize[i].focused = true
+      } else {
+        newCoffeeSize[i].focused = false
+      }
+    }
+    setSize(newCoffeeSize);
   }
   
   useEffect(() => {
@@ -51,6 +123,10 @@ const Item = () => {
           quantity={quantity} 
           decrement={() => decrementBtn()}
           increment={() => incrementBtn()}
+          typeOfChocolatesPressed={({key}) => typeOfChocolatesPressed({key})}
+          onCoffeeSize={({key}) => onCoffeeSize({key})}
+          data={data}
+          size={size}
         />
       </ScrollView>
       <View style={[styles.footer, {backgroundColor: themes.background}]}>
@@ -62,8 +138,8 @@ const Item = () => {
                 <Text style={[styles.priceTxt, { color: themes.tagline}]}>{totalPrice}</Text>
               </View>
             </View>
-            <TouchableOpacity style={styles.buyBtn}>
-              <Text style={{fontSize: 20, color: "#FFF"}}>Buy Now</Text>
+            <TouchableOpacity onPress={onCart} style={styles.buyBtn}>
+              <Text style={{fontSize: 20, color: "#FFF"}}>Add to Cart</Text>
             </TouchableOpacity>
           </View>
       </View>
