@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity } from "react-native";
-import { useTheme, useThemeUpdate } from "../component/ThemeContext";
-import { useRoute, useNavigation } from "@react-navigation/native";
+import { useTheme } from "../component/ThemeContext";
+import { useNavigation } from "@react-navigation/native";
 
 const { height, width } = Dimensions.get("window")
 
@@ -9,8 +9,6 @@ const Introduction = () => {
 
   const themes = useTheme();
   const navigation = useNavigation();
-  //const onChangeThemes = useThemeUpdate();
-
 
   const onNextPage = () => {
     navigation.navigate("TabScreens");

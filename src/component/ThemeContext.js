@@ -18,7 +18,6 @@ const ThemeProvider = ({ children }) => {
 
   const onChangeThemes = () => {
     setCurrentTheme(!currentTheme);
-    //console.log(themes);
   };
 
   useEffect(() => {

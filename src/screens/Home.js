@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import { View, Text, StyleSheet, Dimensions, Image, TouchableOpacity, FlatList } from "react-native";
 import { ScrollView } from 'react-native-virtualized-view';
 import { useTheme, useThemeUpdate } from "../component/ThemeContext";
-import { useRoute, useNavigation } from "@react-navigation/native";
 import coffeeData from "../../assets/coffeeitems.json";
 import CustomInput from "../component/CustomInput";
 import ItemComponent from "../component/ItemComponent";
@@ -10,12 +9,10 @@ import ItemComponent from "../component/ItemComponent";
 const { height, width } = Dimensions.get("window");
 const headNavHeight = height / 14;
 const numColumns = 2;
-const forYouContainerHeight = height / 4.5;
 
 const Home = () => {
 
   const themes = useTheme();
-  const navigation = useNavigation();
   const onChangeThemes = useThemeUpdate();
 
   const [ query, queryCoffee ] = useState();
@@ -38,6 +35,7 @@ const Home = () => {
             source={themes.iconColor? require("../../assets/icons/searchIconLight.png"):require("../../assets/icons/searchIconDark.png")} 
             placeholder={"Find your coffee..."} 
             onChangeText={queryCoffee}
+            value={query}
             searchBackground={themes.componentBackground}
             placeholderTextColor={themes.placeholderTextColor}
             borderWidth={themes.borderWidth}

@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Dimensions, Image } from "react-native";
+import React from "react";
+import { View, Text, StyleSheet, Dimensions, Image } from "react-native";
 import { useTheme } from "./ThemeContext";
 
 const { height, width } = Dimensions.get("window");

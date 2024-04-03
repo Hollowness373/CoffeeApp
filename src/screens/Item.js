@@ -5,7 +5,6 @@ import { useRoute, useNavigation } from "@react-navigation/native";
 import TransparentView from "../component/TransparentView";
 import ItemInfo from "../component/itemComponents/ItemInfo";
 import { addToCart } from "../component/AsyncStorageUtils";
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const { height, width } = Dimensions.get("window");
 

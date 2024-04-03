@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { useTheme } from "../ThemeContext";
 import ChocolateButtons from '../radioButtons/ChocolateButtons';

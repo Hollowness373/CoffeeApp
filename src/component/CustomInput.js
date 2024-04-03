@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, Image, TextInput, StyleSheet} from 'react-native';
 
 const CustomInput = ({ source, value, placeholder, onChangeText, borderWidth, searchBackground, placeholderTextColor}) => {
