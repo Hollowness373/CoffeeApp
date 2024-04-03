@@ -1,25 +1,30 @@
 import React, {useEffect, useState} from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions, Image } from "react-native";
+import { useTheme } from "./ThemeContext";
 
 const { height, width } = Dimensions.get("window");
 
 const ItemCartComponent = ({data, subKey, imgURL, name, total, quantity, size, chocolate, componentBackground}) => {
 
-    const onCheck = () => {
-        //console.log(total, quantity, size, chocolate, imgURL)
-        console.log(data)
-    }
+    const themes = useTheme();
 
     return(
-        <TouchableOpacity style={[styles.container,{backgroundColor: componentBackground}]}
-            onPress={onCheck}
+        <View style={[styles.container,{backgroundColor: componentBackground}]}
             key={subKey} 
         >
-            <View style={{backgroundColor: "blue", height: 100, width: 100}}>
-                <Image source={{uri: imgURL}} style={{height: "100%", width: "100%"}}/>
+            <View style={styles.imageContainer}>
+                <Image source={{uri: imgURL}} style={styles.imageStyle}/>
             </View>
-            <Text>{name}</Text>
-        </TouchableOpacity>
+            <View style={{flex:1}}>
+                <Text style={[styles.txtBold, {color: themes.tagline}]}>{name} ({size})</Text>
+                <Text style={{color: themes.black}}>with {chocolate}</Text>
+                <View style={{flexDirection: "row", justifyContent: "space-between", width: "100%", height: "30%", bottom: 0, position: "absolute"}}>
+                    <Text style={[styles.txtBold, {color: themes.tagline, fontWeight: "bold"}]}>US ${total}</Text>
+                    <Text style={[styles.txtBold, {color: themes.black}]}>x{quantity}</Text>
+                </View>
+            </View>
+            
+        </View>
     )
 }
 const styles = StyleSheet.create({
@@ -27,10 +32,25 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         width: "100%",
         height: height * 0.15,
-        padding: 20, 
-        marginBottom: 20, 
+        padding: 20,  
+        marginTop: 20,
         borderRadius: 20,
 
+    },
+    imageContainer: {
+        height: 100, 
+        width: 100, 
+        marginRight: 20, 
+        borderRadius: 20
+    },
+    imageStyle: {
+        height: "100%", 
+        width: "100%", 
+        borderRadius: 20
+    },
+    txtBold: {
+        fontSize: 18,
+        letterSpacing: 1
     }
 })
 

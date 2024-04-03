@@ -11,6 +11,7 @@ const ItemComponent = ({ imgURL, itemName, addons, price, componentBackground,
     const navigation = useNavigation();
 
     const onItemClick = () => {
+        console.log(itemData)
         navigation.navigate("Item", {itemData})
     }
 

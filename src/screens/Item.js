@@ -41,14 +41,6 @@ const Item = () => {
   const incrementBtn = () => {
     setQuantity(quantity + 1)
   }
-  function generateRandomString(length) {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let result = '';
-    for (let i = 0; i < length; i++) {
-      result += characters.charAt(Math.floor(Math.random() * characters.length));
-    }
-    return result;
-  }
 
   const onCart = async() => {
     let chocolate = data.find((info) => info.focused === true);
@@ -58,11 +50,10 @@ const Item = () => {
       "quantity": quantity, 
       "chocolate": chocolate.value, 
       "size": coffeeSize.value,
-      "name": itemData.name,
+      "name": itemData.itemname,
       "image": itemData.image
     }]
-    const cartID = generateRandomString(5)
-    //const finalData = {[cartID] : items}
+    
     if (chocolate && coffeeSize) {
       try{
         addToCart(items)
