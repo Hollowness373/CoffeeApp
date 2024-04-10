@@ -1,6 +1,12 @@
 # Coffee App
 A mobile application designed to replicate "Coffee App v2 UI" by Dennis Nzioki that can be found [here](https://www.figma.com/community/file/1328825091347271119/coffee-app-v2-ui?searchSessionId=lul19k89-jn98t5mmhq) . Feel free to leave suggestions, improvements or questions, I will respond as soon as possible.
 
+## Coffee App Light
+![image](https://github.com/Hollowness373/CoffeeApp/blob/main/assets/CoffeeApp.png)
+
+## Coffee App Dark
+![image](https://github.com/Hollowness373/CoffeeApp/blob/main/assets/CoffeeAppDark.png)
+
 # Getting Started
 
 >**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
